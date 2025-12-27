@@ -1,2 +1,2 @@
-# pavbot_sim_gz
+# pavbot_sim
 Gazebo Simulation Repo for PAVBot
