@@ -1,0 +1,301 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <model name="pavbot_test">
+    <static>false</static>
+
+    <!-- =========================
+         BASE / CHASSIS
+         ========================= -->
+    <link name="base_link">
+      <!-- base_link origin roughly at wheel axle height -->
+      <pose>0 0 0.17 0 0 0</pose>
+
+      <inertial>
+        <mass>80.0</mass>
+        <inertia>
+          <ixx>5.0</ixx> <ixy>0.0</ixy> <ixz>0.0</ixz>
+          <iyy>8.0</iyy> <iyz>0.0</iyz>
+          <izz>10.0</izz>
+        </inertia>
+      </inertial>
+
+      <!-- Chassis box (0.25m tall). Center at 0.125 so bottom is at z=0 in link frame -->
+      <collision name="chassis_collision">
+        <pose>0 0 0.125 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.91 0.61 0.25</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <visual name="chassis_visual">
+        <pose>0 0 0.125 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.91 0.61 0.25</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.2 0.2 0.2 1</ambient>
+          <diffuse>0.2 0.2 0.2 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Camera mast (visual only) -->
+      <visual name="camera_mast_visual">
+        <!-- Mast centered forward; height 0.70m; bottom at z = 0.35 - 0.35 = 0 -->
+        <pose>0.35 0 0.35 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.03 0.03 0.70</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.15 0.15 0.15 1</ambient>
+          <diffuse>0.15 0.15 0.15 1</diffuse>
+        </material>
+      </visual>
+    </link>
+
+    <!-- =========================
+         CAMERA LINK (mounted on mast)
+         ========================= -->
+    <link name="camera_link">
+      <!-- At top of mast: z ~ 0.70 above base_link origin -->
+      <!-- yaw=pi flips forward direction if it appeared backwards -->
+      <!-- pitch down ~20 deg (0.35 rad) -->
+
+        <!-- x forward, y left, z up; RPY = roll pitch yaw -->
+      <pose>0.35 0.00 0.80 0 -0.45 3.14</pose>
+
+      <inertial>
+        <mass>0.20</mass>
+        <inertia>
+          <ixx>0.0002</ixx> <ixy>0.0</ixy> <ixz>0.0</ixz>
+          <iyy>0.0002</iyy> <iyz>0.0</iyz>
+          <izz>0.0002</izz>
+        </inertia>
+      </inertial>
+
+      <collision name="camera_collision">
+        <geometry>
+          <box>
+            <size>0.06 0.03 0.03</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name="camera_visual">
+        <geometry>
+          <box>
+            <size>0.06 0.03 0.03</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1</ambient>
+          <diffuse>0.1 0.1 0.1 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Camera sensor -->
+      <sensor name="rgb_cam" type="camera">
+        <camera>
+          <!-- 100 degrees horizontal FOV -->
+          <horizontal_fov>1.74533</horizontal_fov>
+
+          <image>
+            <width>1280</width>
+            <height>720</height>
+            <format>R8G8B8</format>
+          </image>
+
+          <clip>
+            <near>0.05</near>
+            <far>50</far>
+          </clip>
+        </camera>
+
+        <always_on>true</always_on>
+        <update_rate>30</update_rate>
+        <visualize>true</visualize>
+      </sensor>
+    </link>
+
+    <joint name="camera_fixed_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>camera_link</child>
+    </joint>
+
+    <!-- =========================
+         DRIVEN WHEELS (DIFF DRIVE)
+         ========================= -->
+    <link name="left_wheel">
+      <pose>0.00 0.27 0.17 0 0 0</pose>
+
+      <inertial>
+        <mass>3.0</mass>
+        <inertia>
+          <ixx>0.02</ixx> <ixy>0</ixy> <ixz>0</ixz>
+          <iyy>0.02</iyy> <iyz>0</iyz>
+          <izz>0.02</izz>
+        </inertia>
+      </inertial>
+
+      <!-- Cylinder axis rotated onto +Y to match joint axis -->
+      <collision name="collision">
+        <pose>0 0 0 1.57079632679 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.17</radius>
+            <length>0.06</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <pose>0 0 0 1.57079632679 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.17</radius>
+            <length>0.06</length>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="right_wheel">
+      <pose>0.00 -0.27 0.17 0 0 0</pose>
+
+      <inertial>
+        <mass>3.0</mass>
+        <inertia>
+          <ixx>0.02</ixx> <ixy>0</ixy> <ixz>0</ixz>
+          <iyy>0.02</iyy> <iyz>0</iyz>
+          <izz>0.02</izz>
+        </inertia>
+      </inertial>
+
+      <collision name="collision">
+        <pose>0 0 0 1.57079632679 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.17</radius>
+            <length>0.06</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <pose>0 0 0 1.57079632679 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.17</radius>
+            <length>0.06</length>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="left_wheel_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>left_wheel</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-1e16</lower>
+          <upper>1e16</upper>
+        </limit>
+      </axis>
+    </joint>
+
+    <joint name="right_wheel_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>right_wheel</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-1e16</lower>
+          <upper>1e16</upper>
+        </limit>
+      </axis>
+    </joint>
+
+    <!-- =========================
+         REAR CASTER (stability)
+         ========================= -->
+    <link name="rear_caster">
+      <!-- back of chassis; adjust x if you want it further back -->
+      <pose>-0.40 0 0.07 0 0 0</pose>
+
+      <inertial>
+        <mass>1.0</mass>
+        <inertia>
+          <ixx>0.001</ixx> <ixy>0</ixy> <ixz>0</ixz>
+          <iyy>0.001</iyy> <iyz>0</iyz>
+          <izz>0.001</izz>
+        </inertia>
+      </inertial>
+
+      <collision name="collision">
+        <geometry>
+          <sphere>
+            <radius>0.07</radius>
+          </sphere>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <sphere>
+            <radius>0.07</radius>
+          </sphere>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="rear_caster_joint" type="ball">
+      <parent>base_link</parent>
+      <child>rear_caster</child>
+    </joint>
+
+    <!-- =========================
+         DIFF DRIVE SYSTEM PLUGIN
+         ========================= -->
+    <plugin filename="libgz-sim8-diff-drive-system.so"
+            name="gz::sim::systems::DiffDrive">
+
+      <left_joint>left_wheel_joint</left_joint>
+      <right_joint>right_wheel_joint</right_joint>
+
+      <wheel_separation>0.54</wheel_separation>
+      <wheel_radius>0.17</wheel_radius>
+
+      <topic>/cmd_vel</topic>
+      <odom_topic>/odom</odom_topic>
+
+      <odom_frame>odom</odom_frame>
+      <base_frame>base_link</base_frame>
+
+      <max_linear_velocity>1.4</max_linear_velocity>
+      <max_angular_velocity>2.2</max_angular_velocity>
+    </plugin>
+
+  </model>
+</sdf>
