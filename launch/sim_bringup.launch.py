@@ -56,7 +56,7 @@ def generate_launch_description():
 
         # Remap lane detector input to the bridged Gazebo image topic
         Node(
-            package="lane_lab",
+            package="pavbot_vision",
             executable="lane_detector",
             name="lane_detector",
             output="screen",
@@ -65,10 +65,11 @@ def generate_launch_description():
             ]
         ),
 
-        Node(
-            package="rviz2",
-            executable="rviz2",
-            arguments=["-d", rviz_cfg],
-            output="screen"
-        )
+    # rviz is being wacky just open in seperate terminal...
+        # Node(
+        #     package="rviz2",
+        #     executable="rviz2",
+        #     arguments=["-d", rviz_cfg],
+        #     output="screen"
+        # )
     ])
