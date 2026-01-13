@@ -1,11 +1,3 @@
-"""
-RUN THIS:
-    colcon build --packages-select pavbot_sim_gz
-    ros2 launch pavbot_sim_gz sim_bringup.launch.py
-
-
-"""
-
 from launch import LaunchDescription
 from launch.actions import ExecuteProcess, SetEnvironmentVariable
 from launch_ros.actions import Node
@@ -16,60 +8,72 @@ def generate_launch_description():
     pkg = FindPackageShare("pavbot_sim_gz")
 
     world = PathJoinSubstitution([pkg, "worlds", "pavbot_test_world.sdf"])
-    rviz_cfg = PathJoinSubstitution([pkg, "rviz", "pavbot_sim.rviz"])
     models_path = PathJoinSubstitution([pkg, "models"])
 
-    # Append our models path to whatever GZ_SIM_RESOURCE_PATH already is.
-    # If the env var is empty, just use models_path.
     gz_resource_path = PythonExpression([
         "'%s:%s' % ('", EnvironmentVariable("GZ_SIM_RESOURCE_PATH"), "', '", models_path, "') "
         "if '", EnvironmentVariable("GZ_SIM_RESOURCE_PATH"), "' != '' "
         "else '", models_path, "'"
     ])
 
-    # Choose ONE camera (recommend camera_link)
-    gz_image = "/world/default/model/pavbot_test/link/camera_link/sensor/rgb_cam/image"
-    gz_info  = "/world/default/model/pavbot_test/link/camera_link/sensor/rgb_cam/camera_info"
+    # Gazebo transport topic names (must match `gz topic -l`)
+    gz_left_image = "/world/default/model/pavbot_test/link/left_camera_link/sensor/left_cam/image"
+    gz_left_info  = "/world/default/model/pavbot_test/link/left_camera_link/sensor/left_cam/camera_info"
+
+    gz_right_image = "/world/default/model/pavbot_test/link/right_camera_link/sensor/right_cam/image"
+    gz_right_info  = "/world/default/model/pavbot_test/link/right_camera_link/sensor/right_cam/camera_info"
 
     return LaunchDescription([
-        SetEnvironmentVariable(
-            name="GZ_SIM_RESOURCE_PATH",
-            value=gz_resource_path
-        ),
+        SetEnvironmentVariable(name="GZ_SIM_RESOURCE_PATH", value=gz_resource_path),
 
         ExecuteProcess(
             cmd=["gz", "sim", "-r", world],
             output="screen"
         ),
 
-        # Bridge Gazebo -> ROS topics (use the long gz topics directly)
+        # Bridge cameras + clock then REMAP to clean ROS topic names
         Node(
             package="ros_gz_bridge",
             executable="parameter_bridge",
             arguments=[
+
                 "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
-                f"{gz_image}@sensor_msgs/msg/Image[gz.msgs.Image",
-                f"{gz_info}@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
+
+                # differential drive (bridge this in launch so can send points)
+                "/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist",
+                "/odom@nav_msgs/msg/Odometry@gz.msgs.Odometry",
+
+                f"{gz_left_image}@sensor_msgs/msg/Image[gz.msgs.Image",
+                f"{gz_left_info}@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
+
+                f"{gz_right_image}@sensor_msgs/msg/Image[gz.msgs.Image",
+                f"{gz_right_info}@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
+            ],
+            remappings=[
+                (gz_left_image,  "/left_cam/image_raw"),
+                (gz_left_info,   "/left_cam/camera_info"),
+                (gz_right_image, "/right_cam/image_raw"),
+                (gz_right_info,  "/right_cam/camera_info"),
             ],
             output="screen"
         ),
 
-        # Remap lane detector input to the bridged Gazebo image topic
+        # Run the dual lane detector (subscribe to ROS topics, not Gazebo topics)
         Node(
             package="pavbot_vision",
-            executable="lane_detector",
-            name="lane_detector",
+            executable="lane_detector_dual",
+            name="lane_detector_dual",
             output="screen",
-            remappings=[
-                ("/camera/image_raw", gz_image),
-            ]
+            parameters=[{
+                "left_camera_topic": "/left_cam/image_raw",
+                "right_camera_topic": "/right_cam/image_raw",
+                "path_frame": "base_link",
+                "sync_slop_sec": 0.50,   # forgiving in sim
+                # Optional tuning:
+                # "roi_top_frac": 0.50,
+                # "mppx": 0.025,
+                # "mppy": 0.025,
+                # "nominal_lane_half_width_m": 0.75,
+            }]
         ),
-
-    # rviz is being wacky just open in seperate terminal...
-        # Node(
-        #     package="rviz2",
-        #     executable="rviz2",
-        #     arguments=["-d", rviz_cfg],
-        #     output="screen"
-        # )
     ])
