@@ -4,10 +4,13 @@ from launch_ros.actions import Node
 from launch.substitutions import PathJoinSubstitution, EnvironmentVariable, PythonExpression
 from launch_ros.substitutions import FindPackageShare
 
+# START PAV @ x=-15, y+-15, yaw=0 in world
 def generate_launch_description():
+    WORLD_NAME = "pavbot_test_world_oval"
+    MODEL_NAME = "pavbot_test"
     pkg = FindPackageShare("pavbot_sim_gz")
 
-    world = PathJoinSubstitution([pkg, "worlds", "pavbot_test_world.sdf"])
+    world = PathJoinSubstitution([pkg, "worlds", "pavbot_test_world_oval.sdf"])
     models_path = PathJoinSubstitution([pkg, "models"])
 
     gz_resource_path = PythonExpression([
@@ -17,11 +20,11 @@ def generate_launch_description():
     ])
 
     # Gazebo transport topic names (must match `gz topic -l`)
-    gz_left_image = "/world/default/model/pavbot_test/link/left_camera_link/sensor/left_cam/image"
-    gz_left_info  = "/world/default/model/pavbot_test/link/left_camera_link/sensor/left_cam/camera_info"
+    gz_left_image = f"/world/{WORLD_NAME}/model/{MODEL_NAME}/link/left_camera_link/sensor/left_cam/image"
+    gz_left_info  = f"/world/{WORLD_NAME}/model/{MODEL_NAME}/link/left_camera_link/sensor/left_cam/camera_info"
 
-    gz_right_image = "/world/default/model/pavbot_test/link/right_camera_link/sensor/right_cam/image"
-    gz_right_info  = "/world/default/model/pavbot_test/link/right_camera_link/sensor/right_cam/camera_info"
+    gz_right_image = f"/world/{WORLD_NAME}/model/{MODEL_NAME}/link/right_camera_link/sensor/right_cam/image"
+    gz_right_info  = f"/world/{WORLD_NAME}/model/{MODEL_NAME}/link/right_camera_link/sensor/right_cam/camera_info"
 
     return LaunchDescription([
         SetEnvironmentVariable(name="GZ_SIM_RESOURCE_PATH", value=gz_resource_path),
@@ -36,16 +39,12 @@ def generate_launch_description():
             package="ros_gz_bridge",
             executable="parameter_bridge",
             arguments=[
-
                 "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
-
-                # differential drive (bridge this in launch so can send points)
                 "/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist",
                 "/odom@nav_msgs/msg/Odometry@gz.msgs.Odometry",
 
                 f"{gz_left_image}@sensor_msgs/msg/Image[gz.msgs.Image",
                 f"{gz_left_info}@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
-
                 f"{gz_right_image}@sensor_msgs/msg/Image[gz.msgs.Image",
                 f"{gz_right_info}@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
             ],
@@ -57,6 +56,7 @@ def generate_launch_description():
             ],
             output="screen"
         ),
+
 
         # Run the dual lane detector (subscribe to ROS topics, not Gazebo topics)
         Node(
