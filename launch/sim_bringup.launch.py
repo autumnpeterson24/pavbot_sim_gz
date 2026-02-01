@@ -3,9 +3,11 @@ from launch.actions import ExecuteProcess, SetEnvironmentVariable, DeclareLaunch
 from launch_ros.actions import Node
 from launch.substitutions import PathJoinSubstitution, EnvironmentVariable, PythonExpression, LaunchConfiguration
 from launch_ros.substitutions import FindPackageShare
+from launch_ros.parameter_descriptions import ParameterFile
 
 def generate_launch_description():
     use_sim_time = LaunchConfiguration("use_sim_time")
+    lane_params  = LaunchConfiguration("lane_params")
 
     WORLD_NAME = "pavbot_test_world_oval"
     MODEL_NAME = "pavbot_test"
@@ -20,8 +22,8 @@ def generate_launch_description():
         "else '", models_path, "'"
     ])
 
-    gz_left_image = f"/world/{WORLD_NAME}/model/{MODEL_NAME}/link/left_camera_link/sensor/left_cam/image"
-    gz_left_info  = f"/world/{WORLD_NAME}/model/{MODEL_NAME}/link/left_camera_link/sensor/left_cam/camera_info"
+    gz_left_image  = f"/world/{WORLD_NAME}/model/{MODEL_NAME}/link/left_camera_link/sensor/left_cam/image"
+    gz_left_info   = f"/world/{WORLD_NAME}/model/{MODEL_NAME}/link/left_camera_link/sensor/left_cam/camera_info"
     gz_right_image = f"/world/{WORLD_NAME}/model/{MODEL_NAME}/link/right_camera_link/sensor/right_cam/image"
     gz_right_info  = f"/world/{WORLD_NAME}/model/{MODEL_NAME}/link/right_camera_link/sensor/right_cam/camera_info"
 
@@ -29,8 +31,19 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "use_sim_time",
             default_value="True",
-            description="Use simulation time (/clock)"),
-        
+            description="Use simulation time (/clock)"
+        ),
+
+        DeclareLaunchArgument(
+            "lane_params",
+            default_value=PathJoinSubstitution([
+                FindPackageShare("pavbot_vision"),
+                "config",
+                "lane_detector_dual_sim.yaml"
+            ]),
+            description="YAML params file for lane_detector_dual"
+        ),
+
         SetEnvironmentVariable(name="GZ_SIM_RESOURCE_PATH", value=gz_resource_path),
 
         ExecuteProcess(
@@ -66,22 +79,25 @@ def generate_launch_description():
             executable="lane_detector_dual",
             name="lane_detector_dual",
             output="screen",
-            parameters=[{
-                "use_sim_time": use_sim_time,
-                "left_camera_topic": "/left_cam/image_raw",
-                "right_camera_topic": "/right_cam/image_raw",
-                "path_frame": "base_link",
-                "sync_slop_sec": 0.05,
+            parameters=[
+                ParameterFile(lane_params, allow_substs=True),
+                {"use_sim_time": use_sim_time},   # force it
+            ],
+        ),
 
-                "use_sync_gate":True,
+        Node(
+            package="tf2_ros",
+            executable="static_transform_publisher",
+            arguments=["0.6","0.65","0.4","0","0.61","0.524",
+                       "pavbot_test/base_link","pavbot_test/left_camera_link/left_cam"],
+            output="screen",
+        ),
 
-                "min_lane_confidence": 0.35,
-                "lane_conf_hysteresis": 0.07,
-                "centerline_smooth_alpha": 0.9,
-                "auto_learn_half_width": True,
-                "half_width_learn_alpha": 0.90,
-                "half_width_min_m": 0.25,
-                "half_width_max_m": 1.25,
-            }]
+        Node(
+            package="tf2_ros",
+            executable="static_transform_publisher",
+            arguments=["0.6","-0.65","0.4","0","0.61","-0.524",
+                       "pavbot_test/base_link","pavbot_test/right_camera_link/right_cam"],
+            output="screen",
         ),
     ])

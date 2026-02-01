@@ -65,7 +65,7 @@
      ========================= -->
     <link name="left_camera_link">
       <!-- x y z roll pitch yaw *yaw to about 30 degrees -->
-      <pose relative_to="base_link">0.6 0.65 0.4 0 0.61 0.524 </pose>
+     <pose relative_to="base_link">0.55  0.3 0.8  0  0.65  0.25</pose>  <!-- left -->
 
       <visual name="left_camera_visual">
         <geometry>
@@ -117,7 +117,7 @@
      ========================= -->
     <link name="right_camera_link">
       <!-- x y z roll pitch yaw -->
-      <pose relative_to="base_link">0.6 -0.65 0.4 0 0.61 -0.524</pose>
+<pose relative_to="base_link">0.55 -0.3 0.8  0  0.65 -0.25</pose>  <!-- right -->
 
       <visual name="right_camera_visual">
         <geometry>
