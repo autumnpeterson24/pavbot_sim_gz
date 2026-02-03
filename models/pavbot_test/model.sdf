@@ -8,7 +8,7 @@
          ========================= -->
     <link name="base_link">
       <!-- base_link origin roughly at wheel axle height -->
-      <pose>0 0 0.17 0 0 0</pose>
+      <pose>0 0 0.0 0 0 0</pose>
 
       <inertial>
         <mass>80.0</mass>
@@ -21,7 +21,7 @@
 
       <!-- Chassis box (0.25m tall). Center at 0.125 so bottom is at z=0 in link frame -->
       <collision name="chassis_collision">
-        <pose>0 0 0.125 0 0 0</pose>
+        <pose>0 0 0.130 0 0 0</pose>
         <geometry>
           <box>
             <size>0.91 0.61 0.25</size>
@@ -38,7 +38,7 @@
       </collision>
 
       <visual name="chassis_visual">
-        <pose>1.2 0.7 -0.32 1.5708 0 -1.5708</pose>
+        <pose>1.2 0.7 -0.15 1.5708 0 -1.5708</pose>
         <geometry>
           
 <mesh>
@@ -65,7 +65,7 @@
      ========================= -->
     <link name="left_camera_link">
       <!-- x y z roll pitch yaw *yaw to about 30 degrees -->
-     <pose relative_to="base_link">0.55  0.3 0.8  0  0.65  0.25</pose>  <!-- left -->
+     <pose relative_to="base_link">0.55  0.3 0.97  0  0.65  0.25</pose>  <!-- left -->
 
       <visual name="left_camera_visual">
         <geometry>
@@ -117,7 +117,7 @@
      ========================= -->
     <link name="right_camera_link">
       <!-- x y z roll pitch yaw -->
-<pose relative_to="base_link">0.55 -0.3 0.8  0  0.65 -0.25</pose>  <!-- right -->
+<pose relative_to="base_link">0.55 -0.3 0.97  0  0.65 -0.25</pose>  <!-- right -->
 
       <visual name="right_camera_visual">
         <geometry>
@@ -172,7 +172,7 @@
    
     <link name="rear_left_caster">
       <!-- Passive caster for wheelchair-style 4-wheel base -->
-      <pose>-0.75 0.46 0.07 0 0 0</pose>
+      <pose relative_to="base_link">-0.75 0.46 0.07 0 0 0</pose>
       <inertial>
         <mass>0.8</mass>
         <inertia>
@@ -213,7 +213,7 @@
 
     <link name="rear_right_caster">
       <!-- Passive caster for wheelchair-style 6-wheel base -->
-      <pose>-0.75 -0.46 0.07 0 0 0</pose>
+      <pose relative_to="base_link">-0.75 -0.46 0.07 0 0 0</pose>
       <inertial>
         <mass>0.8</mass>
         <inertia>
@@ -256,7 +256,7 @@
          DRIVEN WHEELS (DIFF DRIVE)
          ========================= -->
     <link name="left_wheel">
-      <pose>0.00 0.65 0.17 0 0 0</pose>
+      <pose relative_to="base_link">0.00 0.65 0.17 0 0 0</pose>
 
       <inertial>
         <mass>3.0</mass>
@@ -290,7 +290,7 @@
     </link>
 
     <link name="right_wheel">
-      <pose>0.00 -0.65 0.17 0 0 0</pose>
+      <pose relative_to="base_link">0.00 -0.65 0.17 0 0 0</pose>
 
       <inertial>
         <mass>3.0</mass>
