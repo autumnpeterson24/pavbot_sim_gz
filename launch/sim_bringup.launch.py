@@ -8,6 +8,7 @@ from launch_ros.parameter_descriptions import ParameterFile
 def generate_launch_description():
     use_sim_time = LaunchConfiguration("use_sim_time")
     lane_params  = LaunchConfiguration("lane_params")
+    pothole_params = LaunchConfiguration("pothole_params")
 
     WORLD_NAME = "pavbot_test_world_oval"
     MODEL_NAME = "pavbot_test"
@@ -42,6 +43,17 @@ def generate_launch_description():
                 "lane_detector_dual_sim.yaml"
             ]),
             description="YAML params file for lane_detector_dual"
+        ),
+
+                # NEW: pothole params
+        DeclareLaunchArgument(
+            "pothole_params",
+            default_value=PathJoinSubstitution([
+                FindPackageShare("pavbot_vision"),
+                "config",
+                "pothole_detector_dual_sim.yaml"
+            ]),
+            description="YAML params file for pothole_detector_dual"
         ),
 
         SetEnvironmentVariable(name="GZ_SIM_RESOURCE_PATH", value=gz_resource_path),
@@ -99,5 +111,24 @@ def generate_launch_description():
             arguments=["0.6","-0.65","0.4","0","0.61","-0.524",
                        "pavbot_test/base_link","pavbot_test/right_camera_link/right_cam"],
             output="screen",
+        ),
+
+                # NEW: pothole detector node
+        Node(
+            package="pavbot_vision",
+            executable="pothole_detector_dual",
+            name="pothole_detector_dual",
+            output="screen",
+            parameters=[
+                ParameterFile(pothole_params, allow_substs=True),
+                {"use_sim_time": use_sim_time},
+            ],
+            # Only add remaps if your pothole node expects different topic names internally.
+            # Otherwise leave this empty.
+            remappings=[
+                # Example:
+                # ("/left/image", "/left_cam/image_raw"),
+                # ("/left/camera_info", "/left_cam/camera_info"),
+            ],
         ),
     ])

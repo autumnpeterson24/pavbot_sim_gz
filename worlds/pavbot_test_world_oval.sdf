@@ -11285,20 +11285,20 @@
     <!-- Spawn PAV -->
     <include>
       <uri>model://pavbot_test</uri>
-      <pose>-15 15 0.0 0 0 0</pose>
+      <pose>-17 15 0.0 0 0 0</pose>
     </include>
 
     <!-- Potholes -->
-        <!-- <include>
+        <include>
       <uri>model://pothole</uri>
       <name>pothole_01</name>
-      <pose>-13 15 0 0 0 0</pose>
+      <pose>-13 15 0.01 0 0 0</pose>
     </include>
     <include>
       <uri>model://pothole</uri>
       <name>pothole_02</name>
-      <pose>20 14 0 0 0 0</pose>
-    </include> -->
+      <pose>20 14 0.01 0 0 0</pose>
+    </include>
 
   </world>
 </sdf>
