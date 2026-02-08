@@ -131,4 +131,17 @@ def generate_launch_description():
                 # ("/left/camera_info", "/left_cam/camera_info"),
             ],
         ),
+
+        # Pothole points bridge (publish /potholes/points for costmap) ---
+        Node(
+            package="pavbot_vision",
+            executable="pothole_points_bridge",
+            name="pothole_points_bridge",
+            output="screen",
+            parameters=[{
+                "use_sim_time": use_sim_time,
+
+            }],
+        ),
+
     ])

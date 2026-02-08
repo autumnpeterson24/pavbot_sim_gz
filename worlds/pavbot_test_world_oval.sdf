@@ -11289,16 +11289,16 @@
     </include>
 
     <!-- Potholes -->
-        <!-- <include>
+        <include>
       <uri>model://pothole</uri>
       <name>pothole_01</name>
-      <pose>-13 15 0.01 0 0 0</pose>
+      <pose>-14 15 0.01 0 0 0</pose>
     </include>
     <include>
       <uri>model://pothole</uri>
       <name>pothole_02</name>
       <pose>20 14 0.01 0 0 0</pose>
-    </include> -->
+    </include>
 
   </world>
 </sdf>
