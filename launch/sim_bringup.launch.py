@@ -101,7 +101,7 @@ def generate_launch_description():
             package="tf2_ros",
             executable="static_transform_publisher",
             arguments=["0.6","0.65","0.4","0","0.61","0.524",
-                       "pavbot_test/base_link","pavbot_test/left_camera_link/left_cam"],
+                       "base_link","left_camera_link/left_cam"],
             output="screen",
         ),
 
@@ -109,7 +109,7 @@ def generate_launch_description():
             package="tf2_ros",
             executable="static_transform_publisher",
             arguments=["0.6","-0.65","0.4","0","0.61","-0.524",
-                       "pavbot_test/base_link","pavbot_test/right_camera_link/right_cam"],
+                       "base_link","right_camera_link/right_cam"],
             output="screen",
         ),
 
