@@ -24,14 +24,14 @@
       </visual>
 
       <!-- Collision: optional (keep it if you want lidar to “see” it physically) -->
-      <collision name="pothole_collision">
+      <!-- <collision name="pothole_collision">
         <geometry>
           <cylinder>
             <radius>0.3048</radius>
             <length>0.002</length>
           </cylinder>
         </geometry>
-      </collision>
+      </collision> -->
     </link>
   </model>
 </sdf>
