@@ -23,7 +23,7 @@
         <cast_shadows>false</cast_shadows>
       </visual>
 
-      <!-- Collision: optional (keep it if you want lidar to “see” it physically) -->
+      <!-- Collision: optional (keep it if want lidar to “see” it physically) -->
       <!-- <collision name="pothole_collision">
         <geometry>
           <cylinder>
