@@ -11,7 +11,10 @@
 
     <!-- Systems: Physics is required for joints / diff drive dynamics -->
     <plugin filename="libgz-sim8-physics-system.so" name="gz::sim::systems::Physics"/>
-    <plugin filename="libgz-sim8-sensors-system.so" name="gz::sim::systems::Sensors"/>
+    <!-- <plugin filename="libgz-sim8-sensors-system.so" name="gz::sim::systems::Sensors"/> -->
+
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors"/>
+
     <plugin filename="libgz-sim8-scene-broadcaster-system.so" name="gz::sim::systems::SceneBroadcaster"/>
     
     <include>
@@ -11299,6 +11302,19 @@
       <name>pothole_02</name>
       <pose>20 14 0.01 0 0 0</pose>
     </include> -->
+
+    <!-- Barrels -->
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
+      <name>barrel_1</name>
+      <pose>-7 15.0 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
+      <name>barrel_2</name>
+      <pose>18.0 -1.2 0.0 0 0 0</pose>
+    </include>
 
   </world>
 </sdf>

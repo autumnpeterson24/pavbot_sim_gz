@@ -28,6 +28,8 @@ def generate_launch_description():
     gz_right_image = f"/world/{WORLD_NAME}/model/{MODEL_NAME}/link/right_camera_link/sensor/right_cam/image"
     gz_right_info  = f"/world/{WORLD_NAME}/model/{MODEL_NAME}/link/right_camera_link/sensor/right_cam/camera_info"
 
+    gz_scan = f"/world/{WORLD_NAME}/model/{MODEL_NAME}/link/lidar_link/sensor/lidar/scan"
+
     return LaunchDescription([
         DeclareLaunchArgument(
             "use_sim_time",
@@ -77,12 +79,28 @@ def generate_launch_description():
                 f"{gz_left_info}@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
                 f"{gz_right_image}@sensor_msgs/msg/Image[gz.msgs.Image",
                 f"{gz_right_info}@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
+                f"{gz_scan}@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
             ],
             remappings=[
                 (gz_left_image,  "/left_cam/image_raw"),
                 (gz_left_info,   "/left_cam/camera_info"),
                 (gz_right_image, "/right_cam/image_raw"),
                 (gz_right_info,  "/right_cam/camera_info"),
+                (gz_scan, "/scan"), # remap the topic to use scan (actual lidar uses /scan)
+            ],
+        ),
+        Node(
+            package="pavbot_nav",
+            executable="odom_tf_broadcaster",
+            name="odom_tf_broadcaster",
+            output="screen",
+            parameters=[
+                {"use_sim_time": use_sim_time},
+                {"odom_topic": "/odom"},
+                {"odom_frame": "odom"},
+                {"base_frame": "base_link"},
+                {"bootstrap_tf": True},
+                {"bootstrap_rate_hz": 10.0},
             ],
         ),
 
@@ -129,6 +147,7 @@ def generate_launch_description():
                 # Example:
                 # ("/left/image", "/left_cam/image_raw"),
                 # ("/left/camera_info", "/left_cam/camera_info"),
+                
             ],
         ),
 
@@ -143,5 +162,25 @@ def generate_launch_description():
 
             }],
         ),
+
+        Node(
+            package="tf2_ros",
+            executable="static_transform_publisher",
+            arguments=["0.6","0.0","0.8128","0","0","0", "base_link","lidar_link"],
+            output="screen",
+            parameters=[{"use_sim_time": use_sim_time}],
+            ),
+        Node(
+            package="tf2_ros",
+            executable="static_transform_publisher",
+            name="lidar_frame_fix",
+            output="screen",
+            arguments=[
+                "0.600000", "0.000000", "0.812800",
+                "0.000000", "0.000000", "0.000000",
+                "base_link", "pavbot_test/lidar_link/lidar"
+            ],
+            parameters=[{"use_sim_time": use_sim_time}],
+            )
 
     ])

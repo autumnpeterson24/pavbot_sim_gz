@@ -60,6 +60,48 @@
 
     </link>
 
+    <link name="lidar_link">
+      <pose>0.55 0.0 0.8128 0 0 0</pose>
+      <inertial>
+        <mass>0.2</mass>
+        <inertia>
+          <ixx>1e-4</ixx> <iyy>1e-4</iyy> <izz>1e-4</izz>
+          <ixy>0</ixy> <ixz>0</ixz> <iyz>0</iyz>
+        </inertia>
+      </inertial>
+
+      <!-- visual so to see it LIDAR HEIGHT DOES NOT MATTER IT IS max_obstacle_height in NAV2 that is the main thing -->
+      <visual name="lidar_vis">
+        <geometry><cylinder><radius>0.04</radius><length>0.03</length></cylinder></geometry>
+      </visual>
+
+      <sensor name="lidar" type="gpu_lidar">
+        <pose>0 0 0 0 0 0</pose>
+        <update_rate>10</update_rate>
+
+        <lidar>
+          <scan>
+            <horizontal>
+              <samples>720</samples>
+              <resolution>1</resolution>
+              <min_angle>-3.14159</min_angle>
+              <max_angle>3.14159</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.10</min>
+            <max>30.0</max>
+            <resolution>0.01</resolution>
+          </range>
+        </lidar>
+      </sensor>
+    </link>
+
+    <joint name="lidar_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>lidar_link</child>
+    </joint>
+
     <!-- =========================
      LEFT CAMERA (PORT)
      ========================= -->
