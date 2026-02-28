@@ -11307,7 +11307,7 @@
     <include>
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
       <name>barrel_1</name>
-      <pose>-7 15.0 0 0 0 0</pose>
+      <pose>-7 16.0 0 0 0 0</pose>
     </include>
 
     <include>

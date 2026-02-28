@@ -89,20 +89,21 @@ def generate_launch_description():
                 (gz_scan, "/scan"), # remap the topic to use scan (actual lidar uses /scan)
             ],
         ),
-        Node(
-            package="pavbot_nav",
-            executable="odom_tf_broadcaster",
-            name="odom_tf_broadcaster",
-            output="screen",
-            parameters=[
-                {"use_sim_time": use_sim_time},
-                {"odom_topic": "/odom"},
-                {"odom_frame": "odom"},
-                {"base_frame": "base_link"},
-                {"bootstrap_tf": True},
-                {"bootstrap_rate_hz": 10.0},
-            ],
-        ),
+        
+        # Node(
+        #     package="pavbot_nav",
+        #     executable="odom_tf_broadcaster",
+        #     name="odom_tf_broadcaster",
+        #     output="screen",
+        #     parameters=[
+        #         {"use_sim_time": use_sim_time},
+        #         {"odom_topic": "/odom"},
+        #         {"odom_frame": "odom"},
+        #         {"base_frame": "base_link"},
+        #         {"bootstrap_tf": True},
+        #         {"bootstrap_rate_hz": 10.0},
+        #     ],
+        # ),
 
         Node(
             package="pavbot_vision",
@@ -163,13 +164,14 @@ def generate_launch_description():
             }],
         ),
 
-        Node(
-            package="tf2_ros",
-            executable="static_transform_publisher",
-            arguments=["0.6","0.0","0.8128","0","0","0", "base_link","lidar_link"],
-            output="screen",
-            parameters=[{"use_sim_time": use_sim_time}],
-            ),
+        # Node(
+        #     package="tf2_ros",
+        #     executable="static_transform_publisher",
+        #     arguments=["0.6","0.0","0.8128","0","0","0", "base_link","lidar_link"],
+        #     output="screen",
+        #     parameters=[{"use_sim_time": use_sim_time}],
+        #     ),
+
         Node(
             package="tf2_ros",
             executable="static_transform_publisher",
