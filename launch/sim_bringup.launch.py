@@ -53,9 +53,9 @@ def generate_launch_description():
             default_value=PathJoinSubstitution([
                 FindPackageShare("pavbot_vision"),
                 "config",
-                "pothole_detector_dual_sim.yaml"
+                "pothole_detector_single_sim.yaml"
             ]),
-            description="YAML params file for pothole_detector_dual"
+            description="YAML params file for pothole_detector_single"
         ),
 
         SetEnvironmentVariable(name="GZ_SIM_RESOURCE_PATH", value=gz_resource_path),
@@ -132,25 +132,37 @@ def generate_launch_description():
             output="screen",
         ),
 
-                # NEW: pothole detector node
+        # Pothole detector single
         Node(
             package="pavbot_vision",
-            executable="pothole_detector_dual",
-            name="pothole_detector_dual",
+            executable="pothole_detector_single",
+            name="pothole_detector_single",
             output="screen",
             parameters=[
                 ParameterFile(pothole_params, allow_substs=True),
                 {"use_sim_time": use_sim_time},
             ],
-            # Only add remaps if your pothole node expects different topic names internally.
-            # Otherwise leave this empty.
-            remappings=[
-                # Example:
-                # ("/left/image", "/left_cam/image_raw"),
-                # ("/left/camera_info", "/left_cam/camera_info"),
-                
-            ],
         ),
+
+        #         # NEW: pothole detector node
+        # Node(
+        #     package="pavbot_vision",
+        #     executable="pothole_detector_dual",
+        #     name="pothole_detector_dual",
+        #     output="screen",
+        #     parameters=[
+        #         ParameterFile(pothole_params, allow_substs=True),
+        #         {"use_sim_time": use_sim_time},
+        #     ],
+        #     # Only add remaps if your pothole node expects different topic names internally.
+        #     # Otherwise leave this empty.
+        #     remappings=[
+        #         # Example:
+        #         # ("/left/image", "/left_cam/image_raw"),
+        #         # ("/left/camera_info", "/left_cam/camera_info"),
+                
+        #     ],
+        # ),
 
         # Pothole points bridge (publish /potholes/points for costmap) ---
         Node(
