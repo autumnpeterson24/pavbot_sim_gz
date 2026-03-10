@@ -119,7 +119,7 @@ def generate_launch_description():
         Node(
             package="tf2_ros",
             executable="static_transform_publisher",
-            arguments=["0.6","0.65","0.4","0","0.61","0.524",
+            arguments=["0.55","0.3","1.0","0","0.4","0.1",
                        "base_link","left_camera_link/left_cam"],
             output="screen",
         ),
@@ -127,7 +127,7 @@ def generate_launch_description():
         Node(
             package="tf2_ros",
             executable="static_transform_publisher",
-            arguments=["0.6","-0.65","0.4","0","0.61","-0.524",
+            arguments=["0.55","-0.3","1.0","0","0.4","-0.1",
                        "base_link","right_camera_link/right_cam"],
             output="screen",
         ),
