@@ -10,11 +10,11 @@ def generate_launch_description():
     lane_params  = LaunchConfiguration("lane_params")
     pothole_params = LaunchConfiguration("pothole_params")
 
-    WORLD_NAME = "pavbot_test_world_oval"
+    WORLD_NAME = "test_world_lane_vary"
     MODEL_NAME = "pavbot_test"
     pkg = FindPackageShare("pavbot_sim_gz")
 
-    world = PathJoinSubstitution([pkg, "worlds", "pavbot_test_world_oval.sdf"])
+    world = PathJoinSubstitution([pkg, "worlds", "test_world_lane_vary.sdf"])
     models_path = PathJoinSubstitution([pkg, "models"])
 
     gz_resource_path = PythonExpression([
