@@ -184,7 +184,7 @@
      ========================= -->
     <link name="left_camera_link">
       <!-- x y z roll pitch yaw *yaw to about 30 degrees ORIGINAL 0.97 for height 0.65 pitch -->
-     <pose relative_to="base_link">0.55  0.3 1.0  0  0.40  0.10</pose>  <!-- left -->
+     <pose relative_to="base_link">0.55  0.3 1.0  0  0.50  0.10</pose>  <!-- left -->
 
       <visual name="left_camera_visual">
         <geometry>
@@ -236,7 +236,7 @@
      ========================= -->
     <link name="right_camera_link">
       <!-- x y z roll pitch yaw -->
-<pose relative_to="base_link">0.55 -0.3 1.0 0  0.40 -0.10</pose>  <!-- right -->
+<pose relative_to="base_link">0.55 -0.3 1.0 0  0.50 -0.10</pose>  <!-- right -->
 
       <visual name="right_camera_visual">
         <geometry>
@@ -500,7 +500,7 @@
       <odom_frame>odom</odom_frame>
       <base_frame>base_link</base_frame>
 
-      <max_linear_velocity>1.4</max_linear_velocity>
+      <max_linear_velocity>2.2</max_linear_velocity>
       <max_angular_velocity>2.2</max_angular_velocity>
     </plugin>
 

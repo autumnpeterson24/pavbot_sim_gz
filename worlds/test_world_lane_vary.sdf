@@ -2254,9 +2254,15 @@
       <pose>-2.5 7.7 0 0 0 0</pose>
     </include>
 
-    <include>
+        <include>
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
       <name>barrel_2</name>
+      <pose>-2.5 6.7 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
+      <name>barrel_3</name>
       <pose>2.0 -6.7 0 0 0 0</pose>
     </include>
 

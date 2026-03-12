@@ -10,11 +10,11 @@ def generate_launch_description():
     lane_params  = LaunchConfiguration("lane_params")
     pothole_params = LaunchConfiguration("pothole_params")
 
-    WORLD_NAME = "test_world_lane_vary"
+    WORLD_NAME = "pavbot_test_world_oval"
     MODEL_NAME = "pavbot_test"
     pkg = FindPackageShare("pavbot_sim_gz")
 
-    world = PathJoinSubstitution([pkg, "worlds", "test_world_lane_vary.sdf"])
+    world = PathJoinSubstitution([pkg, "worlds", "pavbot_test_world_oval.sdf"])
     models_path = PathJoinSubstitution([pkg, "models"])
 
     gz_resource_path = PythonExpression([
@@ -119,7 +119,7 @@ def generate_launch_description():
         Node(
             package="tf2_ros",
             executable="static_transform_publisher",
-            arguments=["0.55","0.3","1.0","0","0.4","0.1",
+            arguments=["0.55","0.3","1.0","0","0.50","0.1",
                        "base_link","left_camera_link/left_cam"],
             output="screen",
         ),
@@ -127,7 +127,7 @@ def generate_launch_description():
         Node(
             package="tf2_ros",
             executable="static_transform_publisher",
-            arguments=["0.55","-0.3","1.0","0","0.4","-0.1",
+            arguments=["0.55","-0.3","1.0","0","0.50","-0.1",
                        "base_link","right_camera_link/right_cam"],
             output="screen",
         ),
