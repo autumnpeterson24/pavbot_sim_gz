@@ -5,6 +5,8 @@ from launch.substitutions import PathJoinSubstitution, EnvironmentVariable, Pyth
 from launch_ros.substitutions import FindPackageShare
 from launch_ros.parameter_descriptions import ParameterFile
 
+# v1.0 scitechfest demo
+
 def generate_launch_description():
     use_sim_time = LaunchConfiguration("use_sim_time")
     lane_params  = LaunchConfiguration("lane_params")
