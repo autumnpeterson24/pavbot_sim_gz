@@ -2232,11 +2232,11 @@
          Potholes
          ========================= -->
 
-    <!-- <include>
+    <include>
       <uri>model://pothole</uri>
       <name>pothole_01</name>
       <pose>-6.5 5.6 0.01 0 0 0</pose>
-    </include> -->
+    </include> 
 
     <!-- =========================
          Barrels
