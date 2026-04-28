@@ -1,3 +1,9 @@
+"""
+LAUNCH FILE FOR GAZEBO SIMULATION
+Contains all the Gazebo <-> ROS bridges for ROS2 Humble and Gazebo Harmonic Versions
+***No need to launch this, it is included in the other launch file within the nav package (pavbot_nav_bringup.launch.py)
+"""
+
 from launch import LaunchDescription
 from launch.actions import ExecuteProcess, SetEnvironmentVariable, DeclareLaunchArgument
 from launch_ros.actions import Node
@@ -5,18 +11,16 @@ from launch.substitutions import PathJoinSubstitution, EnvironmentVariable, Pyth
 from launch_ros.substitutions import FindPackageShare
 from launch_ros.parameter_descriptions import ParameterFile
 
-# v1.0 scitechfest demo
-
 def generate_launch_description():
     use_sim_time = LaunchConfiguration("use_sim_time")
     lane_params  = LaunchConfiguration("lane_params")
     pothole_params = LaunchConfiguration("pothole_params")
 
-    WORLD_NAME = "test_world_lane_vary"
+    WORLD_NAME = "test_world_lane_vary" # IF USING DIFFERENT WORLD CHANGE HERE
     MODEL_NAME = "pavbot_test"
     pkg = FindPackageShare("pavbot_sim_gz")
 
-    world = PathJoinSubstitution([pkg, "worlds", "test_world_lane_vary.sdf"])
+    world = PathJoinSubstitution([pkg, "worlds", "test_world_lane_vary.sdf"]) # IF USING DIFFERENT WORLD CHANGE HERE
     models_path = PathJoinSubstitution([pkg, "models"])
 
     gz_resource_path = PythonExpression([
@@ -49,7 +53,7 @@ def generate_launch_description():
             description="YAML params file for lane_detector_dual"
         ),
 
-                # NEW: pothole params
+        # NEW: pothole params
         DeclareLaunchArgument(
             "pothole_params",
             default_value=PathJoinSubstitution([
@@ -67,6 +71,7 @@ def generate_launch_description():
             output="screen"
         ),
 
+        # ROS <-> Gazebo BRIDGE (THIS IS WHAT IS USED INSTEAD OF REAL HARDWARE PUBLISHERS)
         Node(
             package="ros_gz_bridge",
             executable="parameter_bridge",
@@ -93,58 +98,8 @@ def generate_launch_description():
                     (gz_right_info,  "/right_cam/camera_info"),
                     (gz_scan, "/scan"),
                 ],
-            # arguments=[
-            #     "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
-            #     "/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist",
-            #     "/odom@nav_msgs/msg/Odometry@gz.msgs.Odometry",
-            #     f"{gz_left_image}@sensor_msgs/msg/Image[gz.msgs.Image",
-            #     f"{gz_left_info}@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
-            #     f"{gz_right_image}@sensor_msgs/msg/Image[gz.msgs.Image",
-            #     f"{gz_right_info}@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
-            #     f"{gz_scan}@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
-            # ],
-            # remappings=[
-            #     (gz_left_image,  "/left_cam/image_raw"),
-            #     (gz_left_info,   "/left_cam/camera_info"),
-            #     (gz_right_image, "/right_cam/image_raw"),
-            #     (gz_right_info,  "/right_cam/camera_info"),
-            #     (gz_scan, "/scan"), # remap the topic to use scan (actual lidar uses /scan)
-            # ],
         ),
-        
-        # Node(
-        #     package="pavbot_nav",
-        #     executable="odom_tf_broadcaster",
-        #     name="odom_tf_broadcaster",
-        #     output="screen",
-        #     parameters=[
-        #         {"use_sim_time": use_sim_time},
-        #         {"odom_topic": "/odom"},
-        #         {"odom_frame": "odom"},
-        #         {"base_frame": "base_link"},
-        #         {"bootstrap_tf": True},
-        #         {"bootstrap_rate_hz": 30.0},
-        #     ],
-        # ),
-
-        #         # --2) NEW LASER ODOM
-        # Node(
-        #     package="rf2o_laser_odometry",
-        #     executable="rf2o_laser_odometry_node",
-        #     name="rf2o_laser_odometry",
-        #     output="screen",
-        #     parameters=[{
-        #         "use_sim_time": use_sim_time,
-        #         "laser_scan_topic": "/scan",
-        #         "odom_topic": "/odom",
-        #         "base_frame_id": "base_link",
-        #         "odom_frame_id": "odom",
-        #         "publish_tf": True,
-        #         "init_pose_from_topic": "/odom_gt",
-        #         "freq": 15.0
-        #     }],
-        # ),
-
+        # Lane detector dual node =============
         Node(
             package="pavbot_vision",
             executable="lane_detector_dual",
@@ -156,25 +111,27 @@ def generate_launch_description():
             ],
         ),
 
+        # Static transform for LEFT CAM (RED BOX ON MODEL) ======
         Node(
             package="tf2_ros",
             executable="static_transform_publisher",
-            arguments=["0.55","0.3","1.0",
-                       "0.1","0.50","0.0",
+            arguments=["0.55","0.3","1.0", # X, Y, Z
+                       "0.1","0.50","0.0", # YAW, PITCH, ROLL
                        "base_link","left_camera_link/left_cam"],
             output="screen",
         ),
 
+        # Static transform for RIGHT CAM (GREEN BOX ON MODEL) ======
         Node(
             package="tf2_ros",
             executable="static_transform_publisher",
-            arguments=["0.55","-0.3","1.0",
-                       "-0.1","0.50","0.0",
+            arguments=["0.55","-0.3","1.0", # X, Y, Z
+                       "-0.1","0.50","0.0", # YAW, PITCH, ROLL
                        "base_link","right_camera_link/right_cam"],
             output="screen",
         ),
 
-        # Pothole detector single
+        # Pothole detector single =====================
         Node(
             package="pavbot_vision",
             executable="pothole_detector_single",
@@ -186,27 +143,7 @@ def generate_launch_description():
             ],
         ),
 
-        #         # NEW: pothole detector node
-        # Node(
-        #     package="pavbot_vision",
-        #     executable="pothole_detector_dual",
-        #     name="pothole_detector_dual",
-        #     output="screen",
-        #     parameters=[
-        #         ParameterFile(pothole_params, allow_substs=True),
-        #         {"use_sim_time": use_sim_time},
-        #     ],
-        #     # Only add remaps if your pothole node expects different topic names internally.
-        #     # Otherwise leave this empty.
-        #     remappings=[
-        #         # Example:
-        #         # ("/left/image", "/left_cam/image_raw"),
-        #         # ("/left/camera_info", "/left_cam/camera_info"),
-                
-        #     ],
-        # ),
-
-        # Pothole points bridge (publish /potholes/points for costmap) ---
+        # Pothole points bridge (publish /potholes/points for costmap) ===
         Node(
             package="pavbot_vision",
             executable="pothole_points_bridge",
@@ -218,22 +155,15 @@ def generate_launch_description():
             }],
         ),
 
-        # Node(
-        #     package="tf2_ros",
-        #     executable="static_transform_publisher",
-        #     arguments=["0.6","0.0","0.8128","0","0","0", "base_link","lidar_link"],
-        #     output="screen",
-        #     parameters=[{"use_sim_time": use_sim_time}],
-        #     ),
-
+        # Static transform for Lidar (Black puck on model) ==================
         Node(
             package="tf2_ros",
             executable="static_transform_publisher",
             name="lidar_frame_fix",
             output="screen",
             arguments=[
-                "0.600000", "0.000000", "0.812800",
-                "0.000000", "0.000000", "0.000000",
+                "0.60", "0.0", "0.812800", # X, Y, Z
+                "0.0", "0.0", "0.0", # YAW, PITCH, ROLL
                 "base_link", "pavbot_test/lidar_link/lidar"
             ],
             parameters=[{"use_sim_time": use_sim_time}],
