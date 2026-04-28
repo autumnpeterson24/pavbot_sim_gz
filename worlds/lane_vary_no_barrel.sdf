@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.9">
-  <world name="test_world_lane_vary">
+  <world name="lane_vary_no_barrel">
 
     <!-- =========================
          PHYSICS
@@ -2227,148 +2227,9 @@
       <uri>model://pavbot_test</uri>
       <pose>-10 6 0.0 0 0 0</pose>
     </include>
-<!-- 
-        <include>
-      <uri>model://pavbot_test</uri>
-      <pose>7.0 -5.7 0 0 0 3.14</pose>
-    </include> -->
-
-    <!-- =========================
-         Potholes
-         ========================= -->
-    <!-- <include>
-      <uri>model://pothole</uri>
-      <name>pothole_01</name>
-      <pose>-5.5 6.5 0 0 0 0</pose>
-    </include>   -->
-    
-
-    <!-- =========================
-         Barrels
-         ========================= -->
-
-    <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
-      <name>barrel_0</name>
-      <pose>-5.5 4.7 0 0 0 0</pose>
-    </include> 
-
-    <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
-      <name>barrel_1</name>
-      <pose>-2.5 7.7 0 0 0 0</pose>
-    </include>
-
-    <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
-      <name>barrel_2</name>
-      <pose>-2.5 6.7 0 0 0 0</pose>
-    </include>
-
-    <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
-      <name>barrel_13</name>
-      <pose>4.0 -5.7 0 0 0 0</pose>
-    </include>
 
 
-    <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
-      <name>barrel_14</name>
-      <pose>10.0 4.0 0 0 0 0</pose>
-    </include> 
-    
-
-    <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
-      <name>barrel_15</name>
-      <pose>13.0 1.0 0 0 0 0</pose>
-    </include> 
-
-    <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
-      <name>barrel_16</name>
-      <pose>6.0 7.0 0 0 0 0</pose>
-    </include> 
-
-
-    <!-- =========================
-         No Man's Land
-         ========================= -->
-
-        <!-- 
-          Left side barrels (robot right/left ref)
-          -->
-<!--  
-     <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
-      <name>barrel_3</name>
-      <pose>2.0 -8.7 0 0 0 0</pose>
-    </include>
-
-    <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
-      <name>barrel_4</name>
-      <pose>1.0 -8.7 0 0 0 0</pose>
-    </include>
-
-    <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
-      <name>barrel_5</name>
-      <pose>0.0 -8.7 0 0 0 0</pose>
-    </include>
-
-    
-
-    <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
-      <name>barrel_6</name>
-      <pose>-1.0 -8.7 0 0 0 0</pose>
-    </include>
-
-    <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
-      <name>barrel_7</name>
-      <pose>-2.0 -8.7 0 0 0 0</pose>
-    </include>  -->
-
-
-
-    <!-- 
-      Right side barrels (robot right/left ref)
-      -->
-
-    <!-- <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
-      <name>barrel_8</name>
-      <pose>2.0 -3.0 0 0 0 0</pose>
-    </include>
-
-
-    <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
-      <name>barrel_9</name>
-      <pose>1.0 -3.0 0 0 0 0</pose>
-    </include>
-
-    <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
-      <name>barrel_10</name>
-      <pose>0.0 -3.0 0 0 0 0</pose>
-    </include>
-
-    <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
-      <name>barrel_11</name>
-      <pose>-1.0 -3.0 0 0 0 0</pose>
-    </include>
-
-    <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
-      <name>barrel_12</name>
-      <pose>-2.0 -3.0 0 0 0 0</pose>
-    </include>   -->
-
+         
 
   </world>
 </sdf>

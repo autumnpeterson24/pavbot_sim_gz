@@ -1,0 +1,1243 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <world name="candy_cane_right">
+
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <plugin filename="libgz-sim8-physics-system.so" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors"/>
+    <plugin filename="libgz-sim8-scene-broadcaster-system.so" name="gz::sim::systems::SceneBroadcaster"/>
+
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/Sun</uri>
+    </include>
+
+    <model name="candy_cane_right">
+      <static>true</static>
+      <link name="track_link">
+
+        <collision name="track_collision">
+          <pose>0.500 -2.500 -0.050 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>14.000 14.000 0.10</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.2</mu>
+                <mu2>1.2</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+
+        <visual name="track_visual">
+          <pose>0.500 -2.500 -0.050 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>14.000 14.000 0.10</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.08 0.08 0.08 1</ambient>
+            <diffuse>0.10 0.10 0.10 1</diffuse>
+            <specular>0.02 0.02 0.02 1</specular>
+          </material>
+        </visual>
+
+        <visual name="outer_lane_000">
+          <pose>-4.0000 1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_001">
+          <pose>-3.6190 1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_002">
+          <pose>-3.2380 1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_003">
+          <pose>-2.8570 1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_004">
+          <pose>-2.4760 1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_005">
+          <pose>-2.0950 1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_006">
+          <pose>-1.7140 1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_007">
+          <pose>-1.3330 1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_008">
+          <pose>-0.9520 1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_009">
+          <pose>-0.5710 1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_010">
+          <pose>-0.1900 1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_011">
+          <pose>0.1910 1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_012">
+          <pose>0.5720 1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_013">
+          <pose>0.9530 1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_014">
+          <pose>1.3340 1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_015">
+          <pose>1.7150 1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_016">
+          <pose>2.0960 1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_000">
+          <pose>-4.0000 -1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_001">
+          <pose>-3.6190 -1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_002">
+          <pose>-3.2380 -1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_003">
+          <pose>-2.8570 -1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_004">
+          <pose>-2.4760 -1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_005">
+          <pose>-2.0950 -1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_006">
+          <pose>-1.7140 -1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_007">
+          <pose>-1.3330 -1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_008">
+          <pose>-0.9520 -1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_009">
+          <pose>-0.5710 -1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_010">
+          <pose>-0.1900 -1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_011">
+          <pose>0.1910 -1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_012">
+          <pose>0.5720 -1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_013">
+          <pose>0.9530 -1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_014">
+          <pose>1.3340 -1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_015">
+          <pose>1.7150 -1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_016">
+          <pose>2.0960 -1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_017">
+          <pose>2.0960 1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_017">
+          <pose>2.0960 -1.5240 0.0010 0 0 0.000000</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_018">
+          <pose>2.6003 1.4923 0.0010 0 0 -0.125664</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_018">
+          <pose>2.2183 -1.5317 0.0010 0 0 -0.125664</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_019">
+          <pose>3.0967 1.3976 0.0010 0 0 -0.251327</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_019">
+          <pose>2.3387 -1.5547 0.0010 0 0 -0.251327</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_020">
+          <pose>3.5773 1.2414 0.0010 0 0 -0.376991</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_020">
+          <pose>2.4553 -1.5925 0.0010 0 0 -0.376991</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_021">
+          <pose>4.0346 1.0263 0.0010 0 0 -0.502655</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_021">
+          <pose>2.5662 -1.6447 0.0010 0 0 -0.502655</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_022">
+          <pose>4.4612 0.7555 0.0010 0 0 -0.628319</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_022">
+          <pose>2.6697 -1.7104 0.0010 0 0 -0.628319</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_023">
+          <pose>4.8506 0.4334 0.0010 0 0 -0.753982</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_023">
+          <pose>2.7641 -1.7885 0.0010 0 0 -0.753982</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_024">
+          <pose>5.1965 0.0650 0.0010 0 0 -0.879646</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_024">
+          <pose>2.8480 -1.8779 0.0010 0 0 -0.879646</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_025">
+          <pose>5.4936 -0.3438 0.0010 0 0 -1.005310</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_025">
+          <pose>2.9201 -1.9770 0.0010 0 0 -1.005310</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_026">
+          <pose>5.7370 -0.7867 0.0010 0 0 -1.130973</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_026">
+          <pose>2.9791 -2.0844 0.0010 0 0 -1.130973</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_027">
+          <pose>5.9231 -1.2565 0.0010 0 0 -1.256637</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_027">
+          <pose>3.0242 -2.1984 0.0010 0 0 -1.256637</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_028">
+          <pose>6.0487 -1.7460 0.0010 0 0 -1.382301</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_028">
+          <pose>3.0547 -2.3171 0.0010 0 0 -1.382301</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_029">
+          <pose>6.1121 -2.2473 0.0010 0 0 -1.507964</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_029">
+          <pose>3.0701 -2.4387 0.0010 0 0 -1.507964</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_030">
+          <pose>6.1121 -2.7527 0.0010 0 0 -1.633628</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_030">
+          <pose>3.0701 -2.5613 0.0010 0 0 -1.633628</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_031">
+          <pose>6.0487 -3.2540 0.0010 0 0 -1.759292</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_031">
+          <pose>3.0547 -2.6829 0.0010 0 0 -1.759292</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_032">
+          <pose>5.9231 -3.7435 0.0010 0 0 -1.884956</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_032">
+          <pose>3.0242 -2.8016 0.0010 0 0 -1.884956</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_033">
+          <pose>5.7370 -4.2133 0.0010 0 0 -2.010619</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_033">
+          <pose>2.9791 -2.9156 0.0010 0 0 -2.010619</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_034">
+          <pose>5.4936 -4.6562 0.0010 0 0 -2.136283</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_034">
+          <pose>2.9201 -3.0230 0.0010 0 0 -2.136283</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_035">
+          <pose>5.1965 -5.0650 0.0010 0 0 -2.261947</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_035">
+          <pose>2.8480 -3.1221 0.0010 0 0 -2.261947</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_036">
+          <pose>4.8506 -5.4334 0.0010 0 0 -2.387610</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_036">
+          <pose>2.7641 -3.2115 0.0010 0 0 -2.387610</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_037">
+          <pose>4.4612 -5.7555 0.0010 0 0 -2.513274</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_037">
+          <pose>2.6697 -3.2896 0.0010 0 0 -2.513274</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_038">
+          <pose>4.0346 -6.0263 0.0010 0 0 -2.638938</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_038">
+          <pose>2.5662 -3.3553 0.0010 0 0 -2.638938</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_039">
+          <pose>3.5773 -6.2414 0.0010 0 0 -2.764602</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_039">
+          <pose>2.4553 -3.4075 0.0010 0 0 -2.764602</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_040">
+          <pose>3.0967 -6.3976 0.0010 0 0 -2.890265</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_040">
+          <pose>2.3387 -3.4453 0.0010 0 0 -2.890265</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_041">
+          <pose>2.6003 -6.4923 0.0010 0 0 -3.015929</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_041">
+          <pose>2.2183 -3.4683 0.0010 0 0 -3.015929</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="outer_lane_042">
+          <pose>2.0960 -6.5240 0.0010 0 0 -3.141593</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <visual name="inner_lane_042">
+          <pose>2.0960 -3.4760 0.0010 0 0 -3.141593</pose>
+          <geometry>
+            <box>
+              <size>0.4500 0.1000 0.0050</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+<!-- PAVBOT SPAWN -->
+    <include>
+      <uri>model://pavbot_test</uri>
+      <pose>-4.0 0.0 0.0 0 0 0</pose>
+    </include>
+
+    <!-- WALL -->
+    
+    <model name="rf2o_wall_0">
+  <static>true</static>
+  <pose>2.0960 -9.0 0.0010 0 0 -3.141593</pose>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box>
+          <size>10.0 0.2 10.0</size>
+        </box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box>
+          <size>10.0 0.2 10.0</size>
+        </box>
+      </geometry>
+      <material>
+        <ambient>0.7 0.7 0.7 1</ambient>
+        <diffuse>0.7 0.7 0.7 1</diffuse>
+      </material>
+    </visual>
+  </link>
+</model>
+
+
+
+    <!-- Fuel Construction Barrels (better for lidar + rf2o) -->
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
+      <name>barrel_0</name>
+      <pose>-2.3 -1.05 0 0 0 0</pose>
+    </include>
+
+     <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
+      <name>barrel_1</name>
+      <pose>-1.0 1.00 0 0 0 0</pose>
+    </include> 
+ 
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
+      <name>barrel_2</name>
+      <pose>2.0 -1.0 0 0 0 0</pose>
+    </include>
+
+
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
+      <name>barrel_3</name>
+      <pose>5.5 1.2 0 0 0 0</pose>
+    </include>
+
+    <!-- Pothole -->
+<!-- 
+        <include>
+      <uri>model://pothole</uri>
+      <name>pothole_01</name>
+      <pose>-0.2 1.05 0 0 0 0</pose>
+    </include> 
+-->
+  </world>
+</sdf>

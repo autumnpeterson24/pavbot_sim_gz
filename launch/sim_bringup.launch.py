@@ -73,23 +73,43 @@ def generate_launch_description():
             name="ros_gz_bridge",
             output="screen",
             parameters=[{"use_sim_time": use_sim_time}],
+
+            # ARGUMENTS FOR USING JUST LIDAR ODOM
             arguments=[
-                "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
-                "/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist",
-                "/odom@nav_msgs/msg/Odometry@gz.msgs.Odometry",
-                f"{gz_left_image}@sensor_msgs/msg/Image[gz.msgs.Image",
-                f"{gz_left_info}@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
-                f"{gz_right_image}@sensor_msgs/msg/Image[gz.msgs.Image",
-                f"{gz_right_info}@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
-                f"{gz_scan}@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
-            ],
-            remappings=[
-                (gz_left_image,  "/left_cam/image_raw"),
-                (gz_left_info,   "/left_cam/camera_info"),
-                (gz_right_image, "/right_cam/image_raw"),
-                (gz_right_info,  "/right_cam/camera_info"),
-                (gz_scan, "/scan"), # remap the topic to use scan (actual lidar uses /scan)
-            ],
+                    "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
+                    "/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist",
+                    "/odom@nav_msgs/msg/Odometry@gz.msgs.Odometry",
+                    f"{gz_left_image}@sensor_msgs/msg/Image[gz.msgs.Image",
+                    f"{gz_left_info}@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
+                    f"{gz_right_image}@sensor_msgs/msg/Image[gz.msgs.Image",
+                    f"{gz_right_info}@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
+                    f"{gz_scan}@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
+                ],
+                remappings=[
+                    ("/odom", "/odom_gt"),
+                    (gz_left_image,  "/left_cam/image_raw"),
+                    (gz_left_info,   "/left_cam/camera_info"),
+                    (gz_right_image, "/right_cam/image_raw"),
+                    (gz_right_info,  "/right_cam/camera_info"),
+                    (gz_scan, "/scan"),
+                ],
+            # arguments=[
+            #     "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
+            #     "/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist",
+            #     "/odom@nav_msgs/msg/Odometry@gz.msgs.Odometry",
+            #     f"{gz_left_image}@sensor_msgs/msg/Image[gz.msgs.Image",
+            #     f"{gz_left_info}@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
+            #     f"{gz_right_image}@sensor_msgs/msg/Image[gz.msgs.Image",
+            #     f"{gz_right_info}@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
+            #     f"{gz_scan}@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
+            # ],
+            # remappings=[
+            #     (gz_left_image,  "/left_cam/image_raw"),
+            #     (gz_left_info,   "/left_cam/camera_info"),
+            #     (gz_right_image, "/right_cam/image_raw"),
+            #     (gz_right_info,  "/right_cam/camera_info"),
+            #     (gz_scan, "/scan"), # remap the topic to use scan (actual lidar uses /scan)
+            # ],
         ),
         
         # Node(
@@ -103,8 +123,26 @@ def generate_launch_description():
         #         {"odom_frame": "odom"},
         #         {"base_frame": "base_link"},
         #         {"bootstrap_tf": True},
-        #         {"bootstrap_rate_hz": 10.0},
+        #         {"bootstrap_rate_hz": 30.0},
         #     ],
+        # ),
+
+        #         # --2) NEW LASER ODOM
+        # Node(
+        #     package="rf2o_laser_odometry",
+        #     executable="rf2o_laser_odometry_node",
+        #     name="rf2o_laser_odometry",
+        #     output="screen",
+        #     parameters=[{
+        #         "use_sim_time": use_sim_time,
+        #         "laser_scan_topic": "/scan",
+        #         "odom_topic": "/odom",
+        #         "base_frame_id": "base_link",
+        #         "odom_frame_id": "odom",
+        #         "publish_tf": True,
+        #         "init_pose_from_topic": "/odom_gt",
+        #         "freq": 15.0
+        #     }],
         # ),
 
         Node(
@@ -121,7 +159,8 @@ def generate_launch_description():
         Node(
             package="tf2_ros",
             executable="static_transform_publisher",
-            arguments=["0.55","0.3","1.0","0","0.50","0.1",
+            arguments=["0.55","0.3","1.0",
+                       "0.1","0.50","0.0",
                        "base_link","left_camera_link/left_cam"],
             output="screen",
         ),
@@ -129,7 +168,8 @@ def generate_launch_description():
         Node(
             package="tf2_ros",
             executable="static_transform_publisher",
-            arguments=["0.55","-0.3","1.0","0","0.50","-0.1",
+            arguments=["0.55","-0.3","1.0",
+                       "-0.1","0.50","0.0",
                        "base_link","right_camera_link/right_cam"],
             output="screen",
         ),

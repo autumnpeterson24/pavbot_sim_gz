@@ -1656,6 +1656,7 @@
             <specular>0.1 0.1 0.1 1</specular>
           </material>
         </visual>
+        <!-- 
         <visual name="inner_lane_061">
           <pose>-8.1751 -3.4867 0.0010 0 0 -3.466667</pose>
           <geometry>
@@ -2215,6 +2216,7 @@
             <specular>0.1 0.1 0.1 1</specular>
           </material>
         </visual>
+        -->
 
 
       </link>
@@ -2227,21 +2229,17 @@
       <uri>model://pavbot_test</uri>
       <pose>-10 6 0.0 0 0 0</pose>
     </include>
-<!-- 
-        <include>
-      <uri>model://pavbot_test</uri>
-      <pose>7.0 -5.7 0 0 0 3.14</pose>
-    </include> -->
 
     <!-- =========================
          Potholes
          ========================= -->
-    <!-- <include>
+<!--
+    <include>
       <uri>model://pothole</uri>
       <name>pothole_01</name>
-      <pose>-5.5 6.5 0 0 0 0</pose>
-    </include>   -->
-    
+      <pose>-0.5 5.6 0.01 0 0 0</pose>
+    </include> 
+    -->
 
     <!-- =========================
          Barrels
@@ -2251,7 +2249,7 @@
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
       <name>barrel_0</name>
       <pose>-5.5 4.7 0 0 0 0</pose>
-    </include> 
+    </include>
 
     <include>
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
@@ -2285,12 +2283,6 @@
       <pose>13.0 1.0 0 0 0 0</pose>
     </include> 
 
-    <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
-      <name>barrel_16</name>
-      <pose>6.0 7.0 0 0 0 0</pose>
-    </include> 
-
 
     <!-- =========================
          No Man's Land
@@ -2299,13 +2291,14 @@
         <!-- 
           Left side barrels (robot right/left ref)
           -->
-<!--  
+<!--
      <include>
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
       <name>barrel_3</name>
       <pose>2.0 -8.7 0 0 0 0</pose>
     </include>
-
+    -->
+<!--
     <include>
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
       <name>barrel_4</name>
@@ -2318,8 +2311,6 @@
       <pose>0.0 -8.7 0 0 0 0</pose>
     </include>
 
-    
-
     <include>
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
       <name>barrel_6</name>
@@ -2330,15 +2321,16 @@
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
       <name>barrel_7</name>
       <pose>-2.0 -8.7 0 0 0 0</pose>
-    </include>  -->
+    </include> 
 
-
+    -->
 
     <!-- 
       Right side barrels (robot right/left ref)
       -->
 
-    <!-- <include>
+<!--
+    <include>
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
       <name>barrel_8</name>
       <pose>2.0 -3.0 0 0 0 0</pose>
@@ -2356,7 +2348,7 @@
       <name>barrel_10</name>
       <pose>0.0 -3.0 0 0 0 0</pose>
     </include>
-
+-->
     <include>
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
       <name>barrel_11</name>
@@ -2367,8 +2359,8 @@
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Construction%20Barrel</uri>
       <name>barrel_12</name>
       <pose>-2.0 -3.0 0 0 0 0</pose>
-    </include>   -->
-
+    </include>  
+  
 
   </world>
 </sdf>
